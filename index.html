@@ -209,6 +209,24 @@
       return resultRules.find(rule => score >= rule.min && score <= rule.max) || resultRules[resultRules.length - 1];
     }
 
+    function toChineseNumber(num) {
+      const map = {
+        1: '一',
+        2: '二',
+        3: '三',
+        4: '四',
+        5: '五',
+        6: '六',
+        7: '七',
+        8: '八',
+        9: '九',
+        10: '十',
+        11: '十一',
+        12: '十二'
+      };
+      return map[num] || num;
+    }
+
     function startQuiz() {
       currentIndex = 0;
       totalScore = 0;
@@ -243,7 +261,7 @@
       app.innerHTML = `
         <div class="badge">金融測驗</div>
         <div class="question-meta">第 ${currentIndex + 1} 題 / ${quizData.length}</div>
-        <div class="question-text">${q.q}</div>
+        <div class="question-text">題目${toChineseNumber(currentIndex + 1)}、${q.q}</div>
         <div class="options">
           ${Object.entries(q.options).map(([key, text]) => `
             <button class="option-btn" onclick="selectAnswer('${key}')">
