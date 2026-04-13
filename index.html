@@ -110,28 +110,35 @@
       background: #f8faff;
       border: 1px solid #dbe5ff;
       box-shadow: 0 8px 18px rgba(0,0,0,0.03);
+      outline: none;
+      -webkit-tap-highlight-color: transparent;
     }
     .option-btn:hover {
       background: #eef4ff;
       transform: translateY(-1px);
     }
-    .option-label {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: #3856c8;
-      color: #fff;
-      font-weight: 800;
-      margin-right: 12px;
-      flex-shrink: 0;
+    .option-btn:focus,
+    .option-btn:active,
+    .option-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.03);
     }
     .option-row {
       display: flex;
       align-items: flex-start;
       gap: 12px;
+    }
+    .option-key {
+      font-weight: 800;
+      color: #3856c8;
+      min-width: 24px;
+      flex-shrink: 0;
+      line-height: 1.7;
+    }
+    .option-text {
+      flex: 1;
+      line-height: 1.7;
+      color: #111827;
     }
     .progress {
       margin-top: 24px;
@@ -264,10 +271,10 @@
         <div class="question-text">題目${toChineseNumber(currentIndex + 1)}、${q.q}</div>
         <div class="options">
           ${Object.entries(q.options).map(([key, text]) => `
-            <button class="option-btn" onclick="selectAnswer('${key}')">
+            <button class="option-btn" type="button" onclick="selectAnswer('${key}')">
               <div class="option-row">
-                <span class="option-label">${key}</span>
-                <span>${text}</span>
+                <span class="option-key">${key}.</span>
+                <span class="option-text">${text}</span>
               </div>
             </button>
           `).join('')}
